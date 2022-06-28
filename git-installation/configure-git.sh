@@ -17,7 +17,7 @@ if [[ -z $gitLocation || $gitLocation == *"$zshWhichVariant"* ]]; then
     exit 0
 fi
 
-while getopts 'u:e' OPTION; do
+while getopts 'u:e:' OPTION; do
   case "$OPTION" in
     u)
         username="$OPTARG"
@@ -37,8 +37,8 @@ if [[ -z "$username" || -z "$email" ]]; then
     echo "You need to provide username and email: [-u username] [-e email]";
 fi
  
-git config --global user.name $username
-git config --global user.email $email
+git config --global user.name "$username"
+git config --global user.email "$email"
 git config --global alias.st "status -sb"
 git config --global alias.co "checkout"
 git config --global alias.cm "commit -m"
@@ -49,7 +49,7 @@ git config --global alias.ge 'config --global -e'
 git config --global alias.unstage 'git restore --staged'
 
 globalIgnoreFile=~/.gitignore_global
-if [ !(-f $globalIgnoreFile) ] ; then
+if [[ !(-f $globalIgnoreFile) ]]; then
   touch $globalIgnoreFile
   echo "*~" >> $globalIgnoreFile
   echo ".DS_Store" >> $globalIgnoreFile

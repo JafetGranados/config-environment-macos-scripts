@@ -1,0 +1,1 @@
+Copy base.properties to a user.properties and provide the correct values.
